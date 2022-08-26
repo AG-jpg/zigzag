@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ControlPersonaje : MonoBehaviour
 {
+    public Transform comienzoRayo;
+    private Animator animator;
     private Rigidbody rb;
     private bool caminarDerecha = true;
 
@@ -11,6 +13,7 @@ public class ControlPersonaje : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -19,6 +22,13 @@ public class ControlPersonaje : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             CambiarDireccion();
+        }
+
+        RaycastHit contacto;
+
+        if(!Physics.Raycast(comienzoRayo.position, -transform.up, out contacto, Mathf.Infinity))
+        {
+            animator.SetTrigger("Cayendo");
         }
     }
 
