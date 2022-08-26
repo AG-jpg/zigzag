@@ -8,12 +8,14 @@ public class ControlPersonaje : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
     private bool caminarDerecha = true;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,14 @@ public class ControlPersonaje : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!gameManager.juegoIniciado)
+        {
+            return;
+        }else
+        {
+            animator.SetTrigger("ComienzaJuego");
+        }
+
         rb.transform.position = transform.position + transform.forward * 2 * Time.deltaTime;
     }
 
