@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControlPersonaje : MonoBehaviour
 {
     public Transform comienzoRayo;
+    public GameObject efectoCristal;
     private Animator animator;
     private Rigidbody rb;
     private bool caminarDerecha = true;
@@ -74,8 +75,11 @@ public class ControlPersonaje : MonoBehaviour
     {
         if(other.tag == "Crystal")
         {
-            Destroy(other.gameObject);
             gameManager.AumentarPuntaje();
+
+            GameObject g = Instantiate(efectoCristal, comienzoRayo.transform.position, Quaternion.identity);
+            Destroy(g, 2);
+            Destroy(other.gameObject);
         }
     }
 }
