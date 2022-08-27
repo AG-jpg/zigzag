@@ -54,6 +54,11 @@ public class ControlPersonaje : MonoBehaviour
 
     private void CambiarDireccion()
     {
+        if(!gameManager.juegoIniciado)
+        {
+            return;
+        }
+
         caminarDerecha = !caminarDerecha;
 
         if(caminarDerecha)
@@ -62,6 +67,15 @@ public class ControlPersonaje : MonoBehaviour
         } else
         {
             transform.rotation = Quaternion.Euler(0,-45,0);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.tag == "Crystal")
+        {
+            Destroy(other.gameObject);
+            gameManager.AumentarPuntaje();
         }
     }
 }
