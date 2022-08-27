@@ -32,6 +32,11 @@ public class ControlPersonaje : MonoBehaviour
         {
             animator.SetTrigger("Cayendo");
         }
+
+        if(transform.position.y < -2)
+        {
+            gameManager.FinalizarJuego();
+        }
     }
 
     private void FixedUpdate()
