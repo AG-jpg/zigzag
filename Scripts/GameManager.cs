@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public void IniciarJuego()
     {
         juegoIniciado = true;
+        FindObjectOfType<Ruta>().IniciarConstruccion();
     }
 
     private void Update()

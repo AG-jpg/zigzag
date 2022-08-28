@@ -7,11 +7,15 @@ public class Ruta : MonoBehaviour
     public GameObject prefabRuta;
     public Vector3 ultimaPosicion;
     public float diferencia = 0.7071066f;
+    private int cuentaRuta = 0;
+
+    public void IniciarConstruccion()
+    {
+        InvokeRepeating("CrearNuevaRuta", 1f, 0.5f);
+    }
 
     public void CrearNuevaRuta()
     {
-        print("Crear Ruta Nueva");
-
         Vector3 nuevaPosicion = Vector3.zero;
         float opcion = Random.Range(0, 100);
 
@@ -26,15 +30,11 @@ public class Ruta : MonoBehaviour
 
         GameObject g = Instantiate(prefabRuta, nuevaPosicion, Quaternion.Euler(0, 45, 0));
         ultimaPosicion = g.transform.position;
-    }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
+        cuentaRuta++;
+        if(cuentaRuta % 5 == 0)
         {
-            CrearNuevaRuta();
+            g.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 }
