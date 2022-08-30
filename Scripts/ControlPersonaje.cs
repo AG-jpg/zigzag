@@ -10,8 +10,14 @@ public class ControlPersonaje : MonoBehaviour
     private Rigidbody rb;
     private bool caminarDerecha = true;
     private GameManager gameManager;
+    public AudioSource chimes;
 
     // Start is called before the first frame update
+    void Start()
+    {
+        chimes = GetComponent<AudioSource>();
+    }
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -76,6 +82,7 @@ public class ControlPersonaje : MonoBehaviour
         if(other.tag == "Crystal")
         {
             gameManager.AumentarPuntaje();
+            chimes.Play();
 
             GameObject g = Instantiate(efectoCristal, comienzoRayo.transform.position, Quaternion.identity);
             Destroy(g, 2);
