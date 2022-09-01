@@ -11,11 +11,13 @@ public class ControlPersonaje : MonoBehaviour
     private bool caminarDerecha = true;
     private GameManager gameManager;
     public AudioSource chimes;
+    public AudioSource fall;
 
     // Start is called before the first frame update
     void Start()
     {
         chimes = GetComponent<AudioSource>();
+        fall = GetComponent<AudioSource>();
     }
 
     void Awake()
@@ -38,6 +40,7 @@ public class ControlPersonaje : MonoBehaviour
         if(!Physics.Raycast(comienzoRayo.position, -transform.up, out contacto, Mathf.Infinity))
         {
             animator.SetTrigger("Cayendo");
+            fall.Play();
         }
 
         if(transform.position.y < -2)
